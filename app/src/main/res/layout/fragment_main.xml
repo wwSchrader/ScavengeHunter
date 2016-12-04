@@ -4,4 +4,32 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/status_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:text="You are not on a hunt."
+        android:padding="20dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="normal|bold"/>
+
+    <Button
+        android:id="@+id/create_hunt_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:layout_margin="10dp"
+        android:text="Create a Hunt"/>
+
+    <Button
+        android:id="@+id/join_team_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:layout_margin="10dp"
+        android:text="Join a team"/>
 </LinearLayout>
