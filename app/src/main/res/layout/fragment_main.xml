@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="25sp"
-        android:text="You are not on a hunt."
+        android:text="@string/not_on_hunt_textview"
         android:padding="20dp"
         android:layout_marginTop="30dp"
         android:textStyle="normal|bold"/>
@@ -22,7 +22,7 @@
         android:layout_gravity="center"
         android:padding="16dp"
         android:layout_margin="10dp"
-        android:text="Create a Hunt"/>
+        android:text="@string/create_a_hunt_btn"/>
 
     <Button
         android:id="@+id/join_team_btn"
@@ -31,5 +31,5 @@
         android:layout_gravity="center"
         android:padding="16dp"
         android:layout_margin="10dp"
-        android:text="Join a team"/>
+        android:text="@string/join_a_team_btn"/>
 </LinearLayout>
