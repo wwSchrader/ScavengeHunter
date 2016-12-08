@@ -38,7 +38,7 @@ public class MainFragment extends Fragment {
     }
 
     //user selects to create a hunt
-    public void createHunt(){
+    private void createHunt(){
         Intent intent = new Intent(mContext, CreateTeamActivity.class);
         startActivity(intent);
     }
