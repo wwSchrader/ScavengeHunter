@@ -17,7 +17,6 @@ import android.widget.Button;
 
 public class CreateTeamFragment extends Fragment{
     private Context mContext;
-    private Button mSaveHuntBtn;
 
     @Nullable
     @Override
@@ -25,8 +24,8 @@ public class CreateTeamFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.fragment_createteam, container);
         mContext = getContext();
 
-        mSaveHuntBtn = (Button) rootView.findViewById(R.id.save_hunt_btn);
-        mSaveHuntBtn.setOnClickListener(new View.OnClickListener() {
+        Button saveHuntBtn = (Button) rootView.findViewById(R.id.save_hunt_btn);
+        saveHuntBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveHuntBtnPress();
