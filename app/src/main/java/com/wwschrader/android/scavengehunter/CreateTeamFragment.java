@@ -16,8 +16,8 @@ import android.widget.Button;
  */
 
 public class CreateTeamFragment extends Fragment{
-    Context mContext;
-    Button mSaveHuntBtn;
+    private Context mContext;
+    private Button mSaveHuntBtn;
 
     @Nullable
     @Override
@@ -35,7 +35,7 @@ public class CreateTeamFragment extends Fragment{
         return rootView;
     }
 
-    public void saveHuntBtnPress() {
+    private void saveHuntBtnPress() {
         Intent intent = new Intent(mContext, AdminActivity.class);
         startActivity(intent);
     }
