@@ -12,11 +12,13 @@ import android.widget.Button;
 
 /**
  * Created by Warren on 12/2/2016.
+ * Fragment that displays if user is not currently in a hunt. Allows the user to choose to either create
+ * a hunt or join a team.
  */
 
 public class MainFragment extends Fragment {
-    Context mContext;
-    Button createHuntBtn;
+    private Context mContext;
+    private Button createHuntBtn;
 
     @Nullable
     @Override
