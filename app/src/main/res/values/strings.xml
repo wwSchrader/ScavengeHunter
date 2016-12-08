@@ -5,4 +5,10 @@
     <string name="not_on_hunt_textview">You are not on a hunt.</string>
     <string name="create_a_hunt_btn">Create a Hunt</string>
     <string name="join_a_team_btn">Join a team</string>
+
+    <!--createTeam Fragment Strings-->
+    <string name="createteam_create_hunt_textview">Create your hunt:</string>
+    <string name="createteam_hunt_name_hint">Hunt Name</string>
+    <string name="createteam_save_hunt_btn">Save Hunt</string>
+    <string name="createteam_hunt_name_icon">Hunt Name Icon</string>
 </resources>
