@@ -11,9 +11,14 @@
     <string name="createteam_hunt_name_hint">Hunt Name</string>
     <string name="createteam_save_hunt_btn">Save Hunt</string>
     <string name="createteam_hunt_name_icon">Hunt Name Icon</string>
+
+    <!--admin fragment Strings-->
     <string name="admin_hunt_status_textview">Hunt status goes here</string>
     <string name="admin_team_rankings_cardview">Team Rankings</string>
     <string name="admin_team_rankings_placeholder">Team Rankings goes here as list</string>
     <string name="admin_tasks_status_cardview">Tasks status</string>
     <string name="admin_completed_tasks_placeholder">Completed tasks goes here</string>
+
+    <!--page titles for tabs-->
+    <string name="page_title_admin_dash">DASHBOARD</string>
 </resources>
