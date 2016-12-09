@@ -18,7 +18,6 @@ import android.widget.Button;
 
 public class MainFragment extends Fragment {
     private Context mContext;
-    private Button createHuntBtn;
 
     @Nullable
     @Override
@@ -26,7 +25,7 @@ public class MainFragment extends Fragment {
         mContext = getContext();
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        createHuntBtn = (Button) rootView.findViewById(R.id.create_hunt_btn);
+        Button createHuntBtn = (Button) rootView.findViewById(R.id.create_hunt_btn);
         createHuntBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
