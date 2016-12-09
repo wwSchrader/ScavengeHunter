@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.wwschrader.android.scavengehunter.AdminActivityManagementFragment;
 import com.wwschrader.android.scavengehunter.AdminFragment;
 import com.wwschrader.android.scavengehunter.AdminTeamManagementFragment;
 import com.wwschrader.android.scavengehunter.R;
@@ -29,6 +30,8 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
                 return new AdminFragment();
             case 1:
                 return new AdminTeamManagementFragment();
+            case 2:
+                return new AdminActivityManagementFragment();
             default:
                 return null;
         }
@@ -41,6 +44,8 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
                 return mContext.getString(R.string.page_title_admin_dash);
             case 1:
                 return mContext.getString(R.string.admin_team_management_page_title);
+            case 2:
+                return mContext.getString(R.string.activity_management_page_title);
             default:
                 return null;
         }
@@ -48,6 +53,6 @@ public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
