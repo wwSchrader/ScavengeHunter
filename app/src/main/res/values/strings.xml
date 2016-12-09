@@ -21,4 +21,10 @@
 
     <!--page titles for tabs-->
     <string name="page_title_admin_dash">DASHBOARD</string>
+    <string name="admin_team_management_page_title">TEAM MANAGEMENT</string>
+
+    <!--team management fragment strings-->
+    <string name="team_management_team_name">Team Name</string>
+    <string name="team_management_teammates_number">number of team members</string>
+    <string name="team_management_points">Points earned: 513</string>
 </resources>
