@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/navigation_view_home"/>
+
+        <item
+            android:id="@+id/navigation_messages"
+            android:icon="@drawable/ic_account"
+            android:title="@string/navigation_view_account"/>
+        <item
+            android:id="@+id/navigation_logoff"
+            android:icon="@drawable/ic_sign_out"
+            android:title="@string/navigation_view_logoff"/>
+    </group>
+</menu>

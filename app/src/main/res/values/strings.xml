@@ -34,4 +34,9 @@
     <string name="activity_description_description">Activity Description</string>
     <string name="activity_management_points">Activity Points</string>
 
+    <!--navigation drawer strings-->
+    <string name="navigation_view_home">Home</string>
+    <string name="navigation_view_account">Account</string>
+    <string name="navigation_view_logoff">Logoff</string>
+
 </resources>
