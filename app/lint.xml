@@ -1,4 +1,4 @@
-<!-- Ignore the IconDensities issue in the given files -->
+ <!--Ignore the IconDensities issue in the given files -->
 <issue id="IconDensities" severity="ignore">
     <ignore path="src/main/res/drawable-xxhdpi/ic_account.png"/>
     <ignore path="src/main/res/drawable-xxhdpi/ic_home.png"/>
