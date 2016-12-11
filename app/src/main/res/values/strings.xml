@@ -42,4 +42,7 @@
     <string name="sign_in_cancelled">Sign in Cancelled!</string>
     <string name="sign_in_no_internet">No internet connection!</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation bar</string>
+
 </resources>

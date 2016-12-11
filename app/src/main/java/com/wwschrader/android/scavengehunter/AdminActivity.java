@@ -1,6 +1,7 @@
 package com.wwschrader.android.scavengehunter;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +9,9 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
@@ -25,11 +28,16 @@ public class AdminActivity extends AppCompatActivity {
     @SuppressWarnings("FieldCanBeLocal")
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle mActionBarDrawerToggle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_pager);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -41,6 +49,10 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //setup animated hamburger icon
+        mActionBarDrawerToggle = setupDrawerToggle();
+        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         CollectionPagerAdapter collectionPagerAdapter = new CollectionPagerAdapter(getSupportFragmentManager(), this);
@@ -48,6 +60,10 @@ public class AdminActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        return new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     private void selectDrawerItem(MenuItem item) {
@@ -67,5 +83,25 @@ public class AdminActivity extends AppCompatActivity {
 
         item.setCheckable(true);
         mDrawerLayout.closeDrawers();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return mActionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        //sync toggle state after onRestoreInstance
+        mActionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        //pass configuration change to drawer toggles
+        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
     }
 }
