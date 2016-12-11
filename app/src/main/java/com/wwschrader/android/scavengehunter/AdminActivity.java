@@ -1,5 +1,6 @@
 package com.wwschrader.android.scavengehunter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.wwschrader.android.scavengehunter.adapters.CollectionPagerAdapter;
 
 /**
@@ -32,8 +36,7 @@ public class AdminActivity extends AppCompatActivity {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setCheckable(true);
-                mDrawerLayout.closeDrawers();
+                selectDrawerItem(item);
                 return true;
             }
         });
@@ -45,5 +48,24 @@ public class AdminActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    private void selectDrawerItem(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.navigation_logoff:
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // user is now signed out
+                                startActivity(new Intent(AdminActivity.this, MainActivity.class));
+                                finish();
+                            }
+                        });
+        }
+
+        item.setCheckable(true);
+        mDrawerLayout.closeDrawers();
     }
 }

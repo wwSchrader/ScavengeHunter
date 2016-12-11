@@ -2,9 +2,6 @@
 
     <!--Main Fragment Strings-->
     <string name="app_name">Scavenge Hunter</string>
-    <string name="not_on_hunt_textview">You are not on a hunt.</string>
-    <string name="create_a_hunt_btn">Create a Hunt</string>
-    <string name="join_a_team_btn">Join a team</string>
 
     <!--createTeam Fragment Strings-->
     <string name="createteam_create_hunt_textview">Create your hunt:</string>
@@ -38,5 +35,11 @@
     <string name="navigation_view_home">Home</string>
     <string name="navigation_view_account">Account</string>
     <string name="navigation_view_logoff">Logoff</string>
+
+    <string name="facebook_application_id" translatable="false">699407940236220</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb699407940236220</string>
+
+    <string name="sign_in_cancelled">Sign in Cancelled!</string>
+    <string name="sign_in_no_internet">No internet connection!</string>
 
 </resources>
