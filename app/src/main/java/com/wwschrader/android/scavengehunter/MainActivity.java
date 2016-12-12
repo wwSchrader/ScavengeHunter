@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() != null) {
             // already signed in
-            startActivity(new Intent(this, AdminActivity.class));
+            startActivity(new Intent(this, NavigationActivity.class));
             finish();
         } else {
             // not signed in
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
                 // user is signed in!
-                startActivity(new Intent(this, AdminActivity.class));
+                startActivity(new Intent(this, NavigationActivity.class));
                 finish();
                 return;
             }
