@@ -13,10 +13,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.wwschrader.android.scavengehunter.adapters.CollectionPagerAdapter;
 
 /**
@@ -24,12 +28,16 @@ import com.wwschrader.android.scavengehunter.adapters.CollectionPagerAdapter;
  * For hosting the admin related fragments.
  */
 
+@SuppressWarnings("FieldCanBeLocal")
 public class AdminActivity extends AppCompatActivity {
     @SuppressWarnings("FieldCanBeLocal")
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
+    private View headerLayout;
+    private TextView headerName;
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,10 +57,18 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //inflate header on nav view and add user name to it
+        headerLayout = mNavigationView.inflateHeaderView(R.layout.nav_header);
+        headerName = (TextView) headerLayout.findViewById(R.id.header_name);
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (mFirebaseUser != null){
+            headerName.setText(mFirebaseUser.getDisplayName());
+        }
+
+
         //setup animated hamburger icon
         mActionBarDrawerToggle = setupDrawerToggle();
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
-
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         CollectionPagerAdapter collectionPagerAdapter = new CollectionPagerAdapter(getSupportFragmentManager(), this);

@@ -44,5 +44,6 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation bar</string>
+    <string name="nav_drawer_user_name">User names goes here</string>
 
 </resources>
