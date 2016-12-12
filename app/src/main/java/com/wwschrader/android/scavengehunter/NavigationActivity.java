@@ -69,7 +69,7 @@ public class NavigationActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
+        fragmentTransaction.replace(R.id.child_fragment_container, new HomeFragment());
         fragmentTransaction.commit();
     }
 
@@ -80,6 +80,10 @@ public class NavigationActivity extends AppCompatActivity {
     private void selectDrawerItem(MenuItem item) {
 
         switch (item.getItemId()){
+            case R.id.navigation_home:
+            case R.id.navigation_admin:
+                swapChildFragment(item.getItemId());
+                break;
             case R.id.navigation_logoff:
                 AuthUI.getInstance()
                         .signOut(this)
@@ -95,6 +99,21 @@ public class NavigationActivity extends AppCompatActivity {
         item.setCheckable(true);
         mDrawerLayout.closeDrawers();
     }
+
+    private void swapChildFragment(int itemId) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch (itemId) {
+            case R.id.navigation_home:
+                fragmentTransaction.replace(R.id.child_fragment_container, new HomeFragment());
+                fragmentTransaction.commit();
+                break;
+            case R.id.navigation_admin:
+                fragmentTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
+                fragmentTransaction.commit();
+                break;
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

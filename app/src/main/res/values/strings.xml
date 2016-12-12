@@ -4,10 +4,6 @@
     <string name="app_name">Scavenge Hunter</string>
 
     <!--createTeam Fragment Strings-->
-    <string name="createteam_create_hunt_textview">Create your hunt:</string>
-    <string name="createteam_hunt_name_hint">Hunt Name</string>
-    <string name="createteam_save_hunt_btn">Save Hunt</string>
-    <string name="createteam_hunt_name_icon">Hunt Name Icon</string>
 
     <!--admin fragment Strings-->
     <string name="admin_hunt_status_textview">Hunt status goes here</string>
@@ -33,17 +29,22 @@
 
     <!--navigation drawer strings-->
     <string name="navigation_view_home">Home</string>
+    <string name="navigation_view_admin">Admin</string>
     <string name="navigation_view_account">Account</string>
     <string name="navigation_view_logoff">Logoff</string>
-
-    <string name="facebook_application_id" translatable="false">699407940236220</string>
-    <string name="facebook_login_protocol_scheme" translatable="false">fb699407940236220</string>
-
-    <string name="sign_in_cancelled">Sign in Cancelled!</string>
-    <string name="sign_in_no_internet">No internet connection!</string>
-
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation bar</string>
     <string name="nav_drawer_user_name">User names goes here</string>
+
+    <!--sign in strings-->
+    <string name="facebook_application_id" translatable="false">699407940236220</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb699407940236220</string>
+    <string name="sign_in_cancelled">Sign in Cancelled!</string>
+    <string name="sign_in_no_internet">No internet connection!</string>
+
+    <!--home fragment strings-->
+    <string name="home_status">Status of hunt or team</string>
+    <string name="home_create_hunt_btn">Create a hunt</string>
+    <string name="home_join_hunt_btn">Join a hunt</string>
 
 </resources>
