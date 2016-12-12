@@ -18,6 +18,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".NavigationActivity"/>
+        <activity android:name=".AccountActivity"
+                  android:label="Account"
+                  android:parentActivityName=".NavigationActivity"
+                  android:theme="@style/SettingsTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NavigationActivity" />
+        </activity>
     </application>
 
 </manifest>

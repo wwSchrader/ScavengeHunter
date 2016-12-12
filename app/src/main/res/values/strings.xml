@@ -3,8 +3,6 @@
     <!--Main Fragment Strings-->
     <string name="app_name">Scavenge Hunter</string>
 
-    <!--createTeam Fragment Strings-->
-
     <!--admin fragment Strings-->
     <string name="admin_hunt_status_textview">Hunt status goes here</string>
     <string name="admin_team_rankings_cardview">Team Rankings</string>
@@ -46,5 +44,6 @@
     <string name="home_status">Status of hunt or team</string>
     <string name="home_create_hunt_btn">Create a hunt</string>
     <string name="home_join_hunt_btn">Join a hunt</string>
+    <string name="preference_delete_account_key">delete-account</string>
 
 </resources>

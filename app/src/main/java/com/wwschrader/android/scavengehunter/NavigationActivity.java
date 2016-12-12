@@ -90,10 +90,13 @@ public class NavigationActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
                                 // user is now signed out
+
                                 startActivity(new Intent(NavigationActivity.this, MainActivity.class));
                                 finish();
                             }
                         });
+            case R.id.navigation_account:
+                startActivity(new Intent(this, AccountActivity.class));
         }
 
         item.setCheckable(true);
@@ -101,16 +104,22 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     private void swapChildFragment(int itemId) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentSupportTransaction = getSupportFragmentManager().beginTransaction();
         switch (itemId) {
             case R.id.navigation_home:
-                fragmentTransaction.replace(R.id.child_fragment_container, new HomeFragment());
-                fragmentTransaction.commit();
+                fragmentSupportTransaction.replace(R.id.child_fragment_container, new HomeFragment());
+                fragmentSupportTransaction.commit();
                 break;
             case R.id.navigation_admin:
-                fragmentTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
+                fragmentSupportTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
+                fragmentSupportTransaction.commit();
+                break;
+            case R.id.navigation_account:
+                android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.child_fragment_container, new AccountFragment());
                 fragmentTransaction.commit();
                 break;
+
         }
     }
 
