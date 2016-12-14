@@ -45,5 +45,12 @@
     <string name="home_create_hunt_btn">Create a hunt</string>
     <string name="home_join_hunt_btn">Join a hunt</string>
     <string name="preference_delete_account_key">delete-account</string>
+    <string name="create_hunt_unique_name_textview">Give a unique name for your hunt</string>
+    <string name="create_hunt_name_hint">Name it after your organization</string>
+    <string name="create_hunt_password_textview">Password</string>
+    <string name="create_hunt_password_hint">a simple password</string>
+    <string name="create_hunt_begin_time_textview">Begin the hunt at:</string>
+    <string name="create_hunt_choose_time_btn">Choose a date and time</string>
+    <string name="create_hunt_end_textview">End the hunt at:</string>
 
 </resources>

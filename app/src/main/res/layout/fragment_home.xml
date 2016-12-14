@@ -10,6 +10,7 @@
         android:text="@string/home_status"/>
 
     <Button
+        android:id="@+id/home_create_hunt_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_create_hunt_btn"/>

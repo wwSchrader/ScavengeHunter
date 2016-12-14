@@ -26,6 +26,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".NavigationActivity" />
         </activity>
+        <activity android:name=".CreateHuntActivity"
+                  android:label="CreateHuntActivity"
+                  android:parentActivityName=".NavigationActivity"
+                  android:theme="@style/SettingsTheme">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NavigationActivity" />
+        </activity>
     </application>
 
 </manifest>
