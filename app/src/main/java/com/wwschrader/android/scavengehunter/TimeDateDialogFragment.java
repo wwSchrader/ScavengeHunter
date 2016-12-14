@@ -55,7 +55,7 @@ public class TimeDateDialogFragment extends DialogFragment {
         minute = calendar.get(Calendar.MINUTE);
 
         //identifies either start or end time button was pressed
-        buttonTag = getArguments().getString("button-pressed");
+        buttonTag = getArguments().getString(getString(R.string.button_pressed_tag_key));
 
         View dialogView = View.inflate(getActivity(), R.layout.dialog_date_and_time_picker, null);
 

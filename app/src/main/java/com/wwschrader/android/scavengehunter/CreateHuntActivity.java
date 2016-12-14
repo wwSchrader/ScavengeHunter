@@ -45,7 +45,7 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
 
     private void startTimeDateDialog(String buttonTag){
         Bundle bundle = new Bundle();
-        bundle.putString("button-pressed", buttonTag);
+        bundle.putString(getString(R.string.button_pressed_tag_key), buttonTag);
         DialogFragment timeDateDialogFragment = new TimeDateDialogFragment();
         timeDateDialogFragment.setArguments(bundle);
         timeDateDialogFragment.show(getSupportFragmentManager(), null);
@@ -62,6 +62,5 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
         } else if (selectedButtonTag.equals(endDateButtonTag)){
             setEndTimeBtn.setText(month + "/" + day + "/" + year + " " + hour + ":" + minute);
         }
-
     }
 }

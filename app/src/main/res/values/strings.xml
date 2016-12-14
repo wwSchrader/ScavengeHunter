@@ -52,5 +52,6 @@
     <string name="create_hunt_begin_time_textview">Begin the hunt at:</string>
     <string name="create_hunt_choose_time_btn">Choose a date and time</string>
     <string name="create_hunt_end_textview">End the hunt at:</string>
+    <string name="button_pressed_tag_key">button-pressed</string>
 
 </resources>
