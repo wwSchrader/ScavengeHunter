@@ -10,6 +10,7 @@
         android:text="@string/create_hunt_unique_name_textview"/>
 
     <EditText
+        android:id="@+id/hunt_name_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/create_hunt_name_hint"/>
@@ -20,9 +21,11 @@
         android:text="@string/create_hunt_password_textview"/>
 
     <EditText
+        android:id="@+id/hunt_password_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/create_hunt_password_hint"/>
+        android:hint="@string/create_hunt_password_hint"
+        android:inputType="textVisiblePassword"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -47,5 +50,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_hunt_choose_time_btn"/>
+
+    <Button
+        android:id="@+id/create_hunt_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/create_hunt_btn"/>
 
 </LinearLayout>
