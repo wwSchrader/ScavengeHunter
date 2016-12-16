@@ -10,6 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.wwschrader.android.scavengehunter.objects.HuntGame;
+
 /**
  * Created by Warren on 12/13/2016.
  * Create hunt to sync with firebase
@@ -31,6 +37,12 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
         setContentView(R.layout.activity_create_hunt);
 
         createHuntSubmit = (Button) findViewById(R.id.create_hunt_submit);
+        createHuntSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitHuntToFirebase();
+            }
+        });
 
         huntNameEditText = (EditText) findViewById(R.id.hunt_name_edit_text);
         huntNameEditText.addTextChangedListener(new TextWatcher() {
@@ -90,6 +102,17 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
         });
     }
 
+    private void submitHuntToFirebase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        //get uid to identify ownership of hunt
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            HuntGame huntGame = new HuntGame(huntName, huntPassword, startTime, endTime, user.getUid());
+            databaseReference.child("hunts").push().setValue(huntGame);
+        }
+
+    }
+
     private void startTimeDateDialog(String buttonTag){
         Bundle bundle = new Bundle();
         bundle.putString(getString(R.string.button_pressed_tag_key), buttonTag);
@@ -104,7 +127,6 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
 
         //add 1 to display proper calendar month
         month += 1;
-
 
         long calendarInMil = Utilities.convertCalendarStringToLong(year + "-" + month + "-" + day
                 + "-" + hour + "-" + minute);
