@@ -107,8 +107,10 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
         //get uid to identify ownership of hunt
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null){
+            //push hunt object to firebase then close activity
             HuntGame huntGame = new HuntGame(huntName, huntPassword, startTime, endTime, user.getUid());
             databaseReference.child("hunts").push().setValue(huntGame);
+            finish();
         }
 
     }
