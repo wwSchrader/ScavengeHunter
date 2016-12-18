@@ -68,12 +68,12 @@ public class HomeFragment extends Fragment {
                         huntStatusTextView.setText(mHuntGame.getHuntName());
                         createHuntButton.setVisibility(Button.GONE);
                         joinHuntButton.setVisibility(Button.GONE);
-                    } else {
-                        huntStatusTextView.setText(R.string.home_no_hunt_textview);
-                        createHuntButton.setVisibility(Button.VISIBLE);
-                        joinHuntButton.setVisibility(Button.VISIBLE);
+                        return;
                     }
                 }
+                huntStatusTextView.setText(R.string.home_no_hunt_textview);
+                createHuntButton.setVisibility(Button.VISIBLE);
+                joinHuntButton.setVisibility(Button.VISIBLE);
             }
 
             @Override

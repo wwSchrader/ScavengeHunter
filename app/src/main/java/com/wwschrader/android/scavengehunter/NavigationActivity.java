@@ -1,5 +1,6 @@
 package com.wwschrader.android.scavengehunter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,15 +12,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.wwschrader.android.scavengehunter.objects.HuntGame;
 
 /**
  * Created by Warren on 12/8/2016.
@@ -36,11 +45,16 @@ public class NavigationActivity extends AppCompatActivity {
     private View headerLayout;
     private TextView headerName;
     private FirebaseUser mFirebaseUser;
+    private DatabaseReference mDatabaseReference;
+    private HuntGame mHuntGame;
+    private MenuItem menuNavAdmin;
+    private Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.navigation_drawer);
+        mContext = this;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +77,11 @@ public class NavigationActivity extends AppCompatActivity {
             headerName.setText(mFirebaseUser.getDisplayName());
         }
 
+        //to setup enabling or disabling menu item based on user hosting a hunt
+        menuNavAdmin = mNavigationView.getMenu().findItem(R.id.navigation_admin);
+
+        //look for active hunt and modify nav drawer options
+        checkDataBaseForHunt();
 
         //setup animated hamburger icon
         mActionBarDrawerToggle = setupDrawerToggle();
@@ -142,5 +161,38 @@ public class NavigationActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         //pass configuration change to drawer toggles
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void checkDataBaseForHunt() {
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        //look for any hunts matching uId. Change textview if found.
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot hunts: dataSnapshot.getChildren()){
+                    mHuntGame = hunts.getValue(HuntGame.class);
+                    if (mHuntGame.getHuntName() != null){
+                        //a hunt where user is admin is found. enable admin menu item
+                        menuNavAdmin.setVisible(true);
+                        menuNavAdmin.setEnabled(true);
+                        return;
+                    }
+                }
+                //no hunts where user is admin. disable admin menu item
+                menuNavAdmin.setVisible(false);
+                menuNavAdmin.setEnabled(false);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Event Listener", "loadHunt:onCancelled", databaseError.toException());
+                Toast.makeText(mContext, "Failed to retrieve hunt info.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+        mDatabaseReference.child("hunts").orderByChild("userUid").equalTo(mFirebaseUser.getUid()).addValueEventListener(eventListener);
     }
 }
