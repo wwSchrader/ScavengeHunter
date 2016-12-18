@@ -57,4 +57,6 @@ public class HuntGame {
         this.huntEndingTime = huntEndingTime;
         this.userUid = userUid;
     }
+
+    public HuntGame(){}
 }

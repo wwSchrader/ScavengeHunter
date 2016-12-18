@@ -45,6 +45,7 @@
     <string name="home_create_hunt_btn">Create a hunt</string>
     <string name="home_join_hunt_btn">Join a hunt</string>
     <string name="preference_delete_account_key" translatable="false">delete-account</string>
+    <string name="home_no_hunt_textview">Add a hunt to get started.</string>
 
     <!--create hunt strings-->
     <string name="create_hunt_unique_name_textview">Give a unique name for your hunt</string>
@@ -60,6 +61,7 @@
     <!--time date dialog strings-->
     <string name="time_date_dialog_ok_btn">OK</string>
     <string name="time_date_dialog_cancel_btn">Cancel</string>
+
 
 
 </resources>
