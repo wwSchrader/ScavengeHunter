@@ -66,9 +66,6 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(mContext, "Hunt deleted!", Toast.LENGTH_LONG).show();
 
                     huntUniqueId = null;
-
-                    //reset buttons to default state
-                    checkDataBaseForHunt();
                 }
             }
         });
