@@ -13,6 +13,17 @@ public class HuntGame {
     private long huntEndingTime;
     private String userUid;
 
+    public HuntGame(){}
+
+    public HuntGame(String huntName, String huntPassword, long huntStartTime, long huntEndingTime, String userUid) {
+
+        this.huntName = huntName;
+        this.huntPassword = huntPassword;
+        this.huntStartTime = huntStartTime;
+        this.huntEndingTime = huntEndingTime;
+        this.userUid = userUid;
+    }
+
     public String getUserUid() {
         return userUid;
     }
@@ -48,15 +59,4 @@ public class HuntGame {
     public void setHuntEndingTime(long huntEndingTime) {
         this.huntEndingTime = huntEndingTime;
     }
-
-    public HuntGame(String huntName, String huntPassword, long huntStartTime, long huntEndingTime, String userUid) {
-
-        this.huntName = huntName;
-        this.huntPassword = huntPassword;
-        this.huntStartTime = huntStartTime;
-        this.huntEndingTime = huntEndingTime;
-        this.userUid = userUid;
-    }
-
-    public HuntGame(){}
 }

@@ -1,5 +1,6 @@
 package com.wwschrader.android.scavengehunter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,11 +33,15 @@ public class HomeFragment extends Fragment {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private HuntGame mHuntGame;
+    private String huntUniqueId;
+    private Context mContext;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mContext = getContext();
 
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
@@ -55,7 +60,16 @@ public class HomeFragment extends Fragment {
         deleteHuntButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(huntUniqueId != null){
+                    //remove hunt from firebase
+                    mDatabaseReference.child("hunts").child(huntUniqueId).removeValue();
+                    Toast.makeText(mContext, "Hunt deleted!", Toast.LENGTH_LONG).show();
 
+                    huntUniqueId = null;
+
+                    //reset buttons to default state
+                    checkDataBaseForHunt();
+                }
             }
         });
         huntStatusTextView = (TextView) rootView.findViewById(R.id.hunt_status_textview);
@@ -74,15 +88,18 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot hunts: dataSnapshot.getChildren()){
                     mHuntGame = hunts.getValue(HuntGame.class);
                     if (mHuntGame.getHuntName() != null){
+                        huntUniqueId = hunts.getKey();
                         huntStatusTextView.setText(mHuntGame.getHuntName());
                         createHuntButton.setVisibility(Button.GONE);
                         joinHuntButton.setVisibility(Button.GONE);
+                        deleteHuntButton.setVisibility(Button.VISIBLE);
                         return;
                     }
                 }
                 huntStatusTextView.setText(R.string.home_no_hunt_textview);
                 createHuntButton.setVisibility(Button.VISIBLE);
                 joinHuntButton.setVisibility(Button.VISIBLE);
+                deleteHuntButton.setVisibility(Button.GONE);
             }
 
             @Override
