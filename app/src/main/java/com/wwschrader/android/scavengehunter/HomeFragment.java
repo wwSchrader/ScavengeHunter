@@ -27,7 +27,7 @@ import com.wwschrader.android.scavengehunter.objects.HuntGame;
  */
 
 public class HomeFragment extends Fragment {
-    private Button createHuntButton, joinHuntButton;
+    private Button createHuntButton, joinHuntButton, deleteHuntButton;
     private TextView huntStatusTextView;
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
@@ -38,6 +38,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
         createHuntButton = (Button) rootView.findViewById(R.id.home_create_hunt_btn);
         createHuntButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +50,14 @@ public class HomeFragment extends Fragment {
         });
 
         joinHuntButton = (Button) rootView.findViewById(R.id.join_hunt_btn);
+
+        deleteHuntButton = (Button) rootView.findViewById(R.id.home_delete_hunt_btn);
+        deleteHuntButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         huntStatusTextView = (TextView) rootView.findViewById(R.id.hunt_status_textview);
 
         checkDataBaseForHunt();
@@ -55,8 +66,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void checkDataBaseForHunt() {
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         //look for any hunts matching uId. Change textview if found.
         ValueEventListener eventListener = new ValueEventListener() {
