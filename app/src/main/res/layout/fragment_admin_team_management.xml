@@ -31,5 +31,4 @@
                 android:text="@string/team_management_points"/>
         </LinearLayout>
         </android.support.v7.widget.CardView>
-
 </LinearLayout>
