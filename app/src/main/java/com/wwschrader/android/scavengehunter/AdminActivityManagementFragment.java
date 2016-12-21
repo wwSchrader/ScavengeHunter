@@ -3,6 +3,7 @@ package com.wwschrader.android.scavengehunter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,8 @@ public class AdminActivityManagementFragment extends Fragment {
         addActivityActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //to add an actvity to hunt
+                DialogFragment createObjectiveFragment = new CreateObjectiveDialogFragment();
+                createObjectiveFragment.show(getFragmentManager(), "CreateObjectiveDialogFragment");
             }
         });
 

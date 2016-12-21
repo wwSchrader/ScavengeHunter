@@ -9,12 +9,14 @@ public class HuntObjectives {
 
     private String objectiveName;
     private String objectiveDescription;
-    private int points;
+    private int objectivePoints;
+
+    public HuntObjectives(){}
 
     public HuntObjectives(String objectiveName, String objectiveDescription, int points) {
         this.objectiveName = objectiveName;
         this.objectiveDescription = objectiveDescription;
-        this.points = points;
+        this.objectivePoints = points;
     }
 
     public String getObjectiveName() {
@@ -34,10 +36,10 @@ public class HuntObjectives {
     }
 
     public int getPoints() {
-        return points;
+        return objectivePoints;
     }
 
     public void setPoints(int points) {
-        this.points = points;
+        this.objectivePoints = points;
     }
 }

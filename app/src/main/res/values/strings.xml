@@ -63,4 +63,16 @@
     <!--time date dialog strings-->
     <string name="time_date_dialog_ok_btn">OK</string>
     <string name="time_date_dialog_cancel_btn">Cancel</string>
+
+    <!--create objective dialog strings-->
+    <string name="create_objective_dialog_title">Create an objective</string>
+    <string name="create_objective_positive_btn">OK</string>
+    <string name="create_objective_negative_btn">Cancel</string>
+    <string name="create_objective_toast">Activity added</string>
+    <string name="create_objective_name_edit_text">Objective Name</string>
+    <string name="create_objective_description_edit_text">Objective Description</string>
+    <string name="create_objectiev_points_edit_text">Assign points</string>
+
+    <!--firebase strings-->
+    <string name="firebase_path_objectives">objectives</string>
 </resources>
