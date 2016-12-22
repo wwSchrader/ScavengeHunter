@@ -63,6 +63,6 @@ public class CreateObjectiveDialogFragment extends DialogFragment{
                 Integer.parseInt(objectivePoints.getText().toString()));
 
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-        firebaseDatabase.child(getString(R.string.firebase_path_objectives)).push().setValue(huntObjectives);
+        firebaseDatabase.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.huntUid).push().setValue(huntObjectives);
     }
 }

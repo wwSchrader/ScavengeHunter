@@ -49,6 +49,8 @@ public class NavigationActivity extends AppCompatActivity {
     private HuntGame mHuntGame;
     private MenuItem menuNavAdmin;
     private Context mContext;
+    //hunt key to be publicly accessible to fragments for firebase references
+    public static String huntUid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -177,6 +179,9 @@ public class NavigationActivity extends AppCompatActivity {
                         //a hunt where user is admin is found. enable admin menu item
                         menuNavAdmin.setVisible(true);
                         menuNavAdmin.setEnabled(true);
+
+                        //assign hunt key to be publicly accessible to fragments for firebase references
+                        huntUid = hunts.getKey();
                         return;
                     }
                 }
