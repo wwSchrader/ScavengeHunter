@@ -1,6 +1,5 @@
 package com.wwschrader.android.scavengehunter;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.wwschrader.android.scavengehunter.adapters.ObjectivesRecyclerViewAdapter;
 import com.wwschrader.android.scavengehunter.objects.HuntObjectives;
 import com.wwschrader.android.scavengehunter.viewholders.ObjectiveRecyclerViewHolder;
 
@@ -40,19 +40,11 @@ public class AdminActivityManagementFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.objective_recycler_view);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
         mObjectiveReference = mDatabaseReference.child("objectives").child(NavigationActivity.huntUid);
-        mAdapter = new FirebaseRecyclerAdapter<HuntObjectives, ObjectiveRecyclerViewHolder>(
+        mAdapter = new ObjectivesRecyclerViewAdapter(
                 HuntObjectives.class,
                 R.layout.view_holder_objectives,
                 ObjectiveRecyclerViewHolder.class,
-                mObjectiveReference) {
-            @SuppressLint("SetTextI18n")
-            @Override
-            protected void populateViewHolder(ObjectiveRecyclerViewHolder viewHolder, HuntObjectives model, int position) {
-                viewHolder.objectiveNameTextView.setText(model.getObjectiveName());
-                viewHolder.objectiveDescriptionTextView.setText(model.getObjectiveDescription());
-                viewHolder.objectivePointsTextView.setText(Integer.toString(model.getPoints()));
-            }
-        };
+                mObjectiveReference);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 
