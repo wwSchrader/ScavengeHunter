@@ -44,7 +44,7 @@ public class AdminActivityManagementFragment extends Fragment {
                 HuntObjectives.class,
                 R.layout.view_holder_objectives,
                 ObjectiveRecyclerViewHolder.class,
-                mObjectiveReference);
+                mObjectiveReference, getContext());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 

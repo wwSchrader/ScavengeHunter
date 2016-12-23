@@ -15,11 +15,17 @@ public class ObjectiveRecyclerViewHolder extends RecyclerView.ViewHolder {
     public final TextView objectiveNameTextView;
     public final TextView objectiveDescriptionTextView;
     public final TextView objectivePointsTextView;
+    private final View rootView;
 
     public ObjectiveRecyclerViewHolder(View itemView) {
         super(itemView);
         objectiveNameTextView = (TextView) itemView.findViewById(R.id.objective_name_textview);
         objectiveDescriptionTextView = (TextView) itemView.findViewById(R.id.objective_description_textview);
         objectivePointsTextView = (TextView) itemView.findViewById(R.id.objective_points_textview);
+        rootView = itemView;
+    }
+
+    public View getRootView() {
+        return rootView;
     }
 }
