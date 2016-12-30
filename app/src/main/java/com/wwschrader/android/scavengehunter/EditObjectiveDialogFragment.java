@@ -55,6 +55,13 @@ public class EditObjectiveDialogFragment extends DialogFragment {
                         Toast.makeText(getContext(), R.string.object_updated_toast, Toast.LENGTH_LONG).show();
                     }
                 })
+                .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteObjectiveInDatabase();
+                        Toast.makeText(getContext(), "Objective deleted", Toast.LENGTH_LONG).show();
+                    }
+                })
                 .setNegativeButton(R.string.create_objective_negative_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -62,6 +69,11 @@ public class EditObjectiveDialogFragment extends DialogFragment {
                     }
                 });
         return builder.create();
+    }
+
+    private void deleteObjectiveInDatabase() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.huntUid).child(uId).removeValue();
     }
 
     private void updateObjectiveToDatabase() {
