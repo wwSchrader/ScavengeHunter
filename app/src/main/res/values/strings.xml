@@ -75,4 +75,13 @@
 
     <!--firebase strings-->
     <string name="firebase_path_objectives">objectives</string>
+
+    <!--objective dialog fragment strings-->
+    <string name="object_name_tag">objectName</string>
+    <string name="object_description_tag">objectDescription</string>
+    <string name="object_points_tag">objectPoints</string>
+    <string name="edit_objectives_title">Edit Objective</string>
+    <string name="object_updated_toast">Objective Updated</string>
+    <string name="object_uid_tag">uId</string>
+    <string name="object_dialog_fragment_tag">CreateObjectiveDialogFragmentEdit</string>
 </resources>

@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.wwschrader.android.scavengehunter.objects.HuntObjectives;
+
 import java.util.Locale;
 
 /**
@@ -21,6 +25,7 @@ import java.util.Locale;
 
 public class EditObjectiveDialogFragment extends DialogFragment {
     private EditText objectiveName, objectiveDescription, objectivePoints;
+    private String uId;
 
     @NonNull
     @Override
@@ -33,20 +38,21 @@ public class EditObjectiveDialogFragment extends DialogFragment {
         objectivePoints = (EditText) dialogView.findViewById(R.id.objectives_points_edit_text);
 
         //set text based on chosen object from recycle view
-        objectiveName.setText(getArguments().getString("objectName"));
-        objectiveDescription.setText(getArguments().getString("objectDescription"));
-        objectivePoints.setText(String.format(Locale.getDefault(), "%d", getArguments().getInt("objectPoints")));
+        objectiveName.setText(getArguments().getString(getString(R.string.object_name_tag)));
+        objectiveDescription.setText(getArguments().getString(getString(R.string.object_description_tag)));
+        objectivePoints.setText(String.format(Locale.getDefault(), "%d", getArguments().getInt(getString(R.string.object_points_tag))));
+        uId = getArguments().getString(getString(R.string.object_uid_tag));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setView(dialogView)
-                .setTitle("Edit Objective")
+                .setTitle(R.string.edit_objectives_title)
                 .setPositiveButton(R.string.create_objective_positive_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //update database
                         updateObjectiveToDatabase();
-                        Toast.makeText(getContext(), "Objective Updated", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.object_updated_toast, Toast.LENGTH_LONG).show();
                     }
                 })
                 .setNegativeButton(R.string.create_objective_negative_btn, new DialogInterface.OnClickListener() {
@@ -59,7 +65,14 @@ public class EditObjectiveDialogFragment extends DialogFragment {
     }
 
     private void updateObjectiveToDatabase() {
+        HuntObjectives huntObjectives = new HuntObjectives(
+                objectiveName.getText().toString(),
+                objectiveDescription.getText().toString(),
+                Integer.parseInt(objectivePoints.getText().toString()));
 
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.huntUid).child(uId).setValue(huntObjectives);
     }
 
 

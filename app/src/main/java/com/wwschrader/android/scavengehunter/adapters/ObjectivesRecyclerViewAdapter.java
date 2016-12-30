@@ -10,6 +10,7 @@ import android.view.View;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.Query;
 import com.wwschrader.android.scavengehunter.EditObjectiveDialogFragment;
+import com.wwschrader.android.scavengehunter.R;
 import com.wwschrader.android.scavengehunter.objects.HuntObjectives;
 import com.wwschrader.android.scavengehunter.viewholders.ObjectiveRecyclerViewHolder;
 
@@ -23,7 +24,7 @@ public class ObjectivesRecyclerViewAdapter extends FirebaseRecyclerAdapter<HuntO
     private Context mContext;
 
     public ObjectivesRecyclerViewAdapter(Class<HuntObjectives> modelClass, int modelLayout, Class<ObjectiveRecyclerViewHolder> viewHolderClass, Query ref, Context context) {
-        super(modelClass, modelLayout, viewHolderClass, ref);
+        super(modelClass, com.wwschrader.android.scavengehunter.R.layout.view_holder_objectives, viewHolderClass, ref);
         mContext = context;
     }
 
@@ -39,13 +40,14 @@ public class ObjectivesRecyclerViewAdapter extends FirebaseRecyclerAdapter<HuntO
             public void onClick(View view) {
                 //grab info for objective to pass to dialog fragment
                 Bundle bundle = new Bundle();
-                bundle.putString("objectName", model.getObjectiveName());
-                bundle.putString("objectDescription", model.getObjectiveDescription());
-                bundle.putInt("objectPoints", model.getPoints());
+                bundle.putString(mContext.getString(R.string.object_name_tag), model.getObjectiveName());
+                bundle.putString(mContext.getString(R.string.object_description_tag), model.getObjectiveDescription());
+                bundle.putInt(mContext.getString(R.string.object_points_tag), model.getPoints());
+                bundle.putString(mContext.getString(R.string.object_uid_tag), getRef(position).getKey());
 
                 DialogFragment editObjectiveFragment = new EditObjectiveDialogFragment();
                 editObjectiveFragment.setArguments(bundle);
-                editObjectiveFragment.show(((AppCompatActivity) mContext).getSupportFragmentManager(), "CreateObjectiveDialogFragmentEdit");
+                editObjectiveFragment.show(((AppCompatActivity) mContext).getSupportFragmentManager(), mContext.getString(R.string.object_dialog_fragment_tag));
             }
         });
     }
