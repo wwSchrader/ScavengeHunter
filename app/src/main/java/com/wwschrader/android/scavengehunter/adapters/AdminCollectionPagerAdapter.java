@@ -15,10 +15,10 @@ import com.wwschrader.android.scavengehunter.R;
  * For creating scrollable tabs.
  */
 
-public class CollectionPagerAdapter extends FragmentStatePagerAdapter {
+public class AdminCollectionPagerAdapter extends FragmentStatePagerAdapter {
     private final Context mContext;
 
-    public CollectionPagerAdapter(FragmentManager fragmentManager, Context context){
+    public AdminCollectionPagerAdapter(FragmentManager fragmentManager, Context context){
         super(fragmentManager);
         mContext = context;
     }
