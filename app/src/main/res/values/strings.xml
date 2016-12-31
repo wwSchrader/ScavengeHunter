@@ -75,6 +75,7 @@
 
     <!--firebase strings-->
     <string name="firebase_path_objectives">objectives</string>
+    <string name="firebase_path_users">users</string>
 
     <!--objective dialog fragment strings-->
     <string name="object_name_tag">objectName</string>
@@ -84,4 +85,10 @@
     <string name="object_updated_toast">Objective Updated</string>
     <string name="object_uid_tag">uId</string>
     <string name="object_dialog_fragment_tag">CreateObjectiveDialogFragmentEdit</string>
+
+    <!--admin fragment strings-->
+    <string name="admin_left_hunt_toast">Left Hunt</string>
+    <string name="admin_join_hunt_toast">Joined Hunt</string>
+    <string name="admin_join_hunt_btn">Join Hunt</string>
+    <string name="admin_leave_hunt_btn">Leave Hunt</string>
 </resources>

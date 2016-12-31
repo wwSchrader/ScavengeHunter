@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // User is not signed in. Maybe just wait for the user to press
+            // HuntUser is not signed in. Maybe just wait for the user to press
             // "sign in" again, or show a message.
         }
     }
