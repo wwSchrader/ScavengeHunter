@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wwschrader.android.scavengehunter.objects.HuntGame;
+import com.wwschrader.android.scavengehunter.objects.HuntUser;
 
 /**
  * Created by Warren on 12/8/2016.
@@ -47,6 +48,7 @@ public class NavigationActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private HuntGame mHuntGame;
+    private HuntUser mHuntUser;
     private MenuItem menuNavAdmin;
     private Context mContext;
     //hunt key to be publicly accessible to fragments for firebase references
@@ -103,6 +105,7 @@ public class NavigationActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.navigation_home:
             case R.id.navigation_admin:
+            case R.id.navigation_hunt:
                 swapChildFragment(item.getItemId());
                 break;
             case R.id.navigation_logoff:
@@ -135,12 +138,15 @@ public class NavigationActivity extends AppCompatActivity {
                 fragmentSupportTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
                 fragmentSupportTransaction.commit();
                 break;
+            case R.id.navigation_hunt:
+                fragmentSupportTransaction.replace(R.id.child_fragment_container, new HuntHomeFragment());
+                fragmentSupportTransaction.commit();
+                break;
             case R.id.navigation_account:
                 android.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.child_fragment_container, new AccountFragment());
                 fragmentTransaction.commit();
                 break;
-
         }
     }
 

@@ -34,6 +34,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation bar</string>
     <string name="nav_drawer_user_name">User names goes here</string>
+    <string name="navigation_hunt">Hunt</string>
 
     <!--sign in strings-->
     <string name="facebook_application_id" translatable="false">699407940236220</string>
@@ -91,4 +92,7 @@
     <string name="admin_join_hunt_toast">Joined Hunt</string>
     <string name="admin_join_hunt_btn">Join Hunt</string>
     <string name="admin_leave_hunt_btn">Leave Hunt</string>
+
+    <!--hunt home fragment strings-->
+    <string name="hunt_status_textview">Status goes here</string>
 </resources>

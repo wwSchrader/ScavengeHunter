@@ -12,6 +12,11 @@
             android:title="@string/navigation_view_admin"/>
 
         <item
+            android:id="@+id/navigation_hunt"
+            android:icon="@drawable/ic_hunt"
+            android:title="@string/navigation_hunt"/>
+
+        <item
             android:id="@+id/navigation_account"
             android:icon="@drawable/ic_account"
             android:title="@string/navigation_view_account"/>
