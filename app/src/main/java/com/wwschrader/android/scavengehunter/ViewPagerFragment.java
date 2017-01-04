@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wwschrader.android.scavengehunter.adapters.AdminCollectionPagerAdapter;
+import com.wwschrader.android.scavengehunter.adapters.HuntCollectionPagerAdapter;
 
 /**
  * Created by Warren on 12/11/2016.
@@ -29,8 +30,16 @@ public class ViewPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-        AdminCollectionPagerAdapter adminCollectionPagerAdapter = new AdminCollectionPagerAdapter(getChildFragmentManager(), getContext());
-        viewPager.setAdapter(adminCollectionPagerAdapter);
+        switch (getArguments().getInt("category")){
+            case R.id.navigation_admin:
+                AdminCollectionPagerAdapter adminCollectionPagerAdapter = new AdminCollectionPagerAdapter(getChildFragmentManager(), getContext());
+                viewPager.setAdapter(adminCollectionPagerAdapter);
+                break;
+            case R.id.navigation_hunt:
+                HuntCollectionPagerAdapter huntCollectionPagerAdapter = new HuntCollectionPagerAdapter(getChildFragmentManager(), getContext());
+                viewPager.setAdapter(huntCollectionPagerAdapter);
+                break;
+        }
 
         TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);

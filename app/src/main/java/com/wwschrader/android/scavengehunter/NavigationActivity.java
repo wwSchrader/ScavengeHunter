@@ -129,17 +129,23 @@ public class NavigationActivity extends AppCompatActivity {
 
     private void swapChildFragment(int itemId) {
         FragmentTransaction fragmentSupportTransaction = getSupportFragmentManager().beginTransaction();
+        Bundle bundle = new Bundle();
+        ViewPagerFragment viewPagerFragment = new ViewPagerFragment();
         switch (itemId) {
             case R.id.navigation_home:
                 fragmentSupportTransaction.replace(R.id.child_fragment_container, new HomeFragment());
                 fragmentSupportTransaction.commit();
                 break;
             case R.id.navigation_admin:
-                fragmentSupportTransaction.replace(R.id.child_fragment_container, new ViewPagerFragment());
+                bundle.putInt("category", R.id.navigation_admin);
+                viewPagerFragment.setArguments(bundle);
+                fragmentSupportTransaction.replace(R.id.child_fragment_container, viewPagerFragment);
                 fragmentSupportTransaction.commit();
                 break;
             case R.id.navigation_hunt:
-                fragmentSupportTransaction.replace(R.id.child_fragment_container, new HuntHomeFragment());
+                bundle.putInt("category", R.id.navigation_hunt);
+                viewPagerFragment.setArguments(bundle);
+                fragmentSupportTransaction.replace(R.id.child_fragment_container, viewPagerFragment);
                 fragmentSupportTransaction.commit();
                 break;
             case R.id.navigation_account:

@@ -95,4 +95,7 @@
 
     <!--hunt home fragment strings-->
     <string name="hunt_status_textview">Status goes here</string>
+
+    <!--hunt objectives fragment strings-->
+    <string name="hunt_fragment_objectives_title">Objectives</string>
 </resources>
