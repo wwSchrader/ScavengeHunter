@@ -4,10 +4,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/objectives_title"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hunt_objectives_recycler"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hunt_fragment_objectives_title"/>
-
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"/>
 </LinearLayout>
