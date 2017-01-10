@@ -24,7 +24,7 @@ public class ObjectivesRecyclerViewAdapter extends FirebaseRecyclerAdapter<HuntO
     private Context mContext;
 
     public ObjectivesRecyclerViewAdapter(Class<HuntObjectives> modelClass, int modelLayout, Class<ObjectiveRecyclerViewHolder> viewHolderClass, Query ref, Context context) {
-        super(modelClass, com.wwschrader.android.scavengehunter.R.layout.view_holder_objectives, viewHolderClass, ref);
+        super(modelClass, R.layout.view_holder_objectives, viewHolderClass, ref);
         mContext = context;
     }
 
