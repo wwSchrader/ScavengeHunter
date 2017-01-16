@@ -26,14 +26,21 @@
 
     <TextView
         android:id="@+id/player_objective_points_textview"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:textSize="30sp"
-        android:layout_gravity="end"
-        android:gravity="end|center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:layout_weight="1"/>
 
     <CheckBox
         android:id="@+id/player_objectives_check_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:gravity="center"/>
 </LinearLayout>
