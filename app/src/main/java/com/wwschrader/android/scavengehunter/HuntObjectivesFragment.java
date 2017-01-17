@@ -45,9 +45,8 @@ public class HuntObjectivesFragment extends Fragment {
 
         mAdapter = new PlayerObjectivesRecyclerViewAdapter(
                 HuntObjectives.class,
-                R.layout.view_holder_player_objectives,
                 PlayerObjectiveRecyclerViewHolder.class,
-                mObjectiveReference, getContext());
+                mObjectiveReference);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 

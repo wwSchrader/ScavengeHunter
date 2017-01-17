@@ -29,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.wwschrader.android.scavengehunter.objects.HuntGame;
-import com.wwschrader.android.scavengehunter.objects.HuntUser;
 
 /**
  * Created by Warren on 12/8/2016.
@@ -48,11 +47,11 @@ public class NavigationActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private HuntGame mHuntGame;
-    private HuntUser mHuntUser;
     private MenuItem menuNavAdmin;
     private Context mContext;
     //hunt key to be publicly accessible to fragments for firebase references
     public static String huntUid;
+    public static String userUid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +78,10 @@ public class NavigationActivity extends AppCompatActivity {
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mFirebaseUser != null){
             headerName.setText(mFirebaseUser.getDisplayName());
+        }
+
+        if (mFirebaseUser != null) {
+            userUid = mFirebaseUser.getUid();
         }
 
         //to setup enabling or disabling menu item based on user hosting a hunt
