@@ -13,7 +13,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.wwschrader.android.scavengehunter.objects.HuntUser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Warren on 12/8/2016.
@@ -52,7 +54,8 @@ public class AdminFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
         if (user != null) {
-            firebaseDatabase.child(getString(R.string.firebase_path_users)).child(user.getUid()).removeValue();
+            firebaseDatabase.child(getString(R.string.firebase_path_users)).child(user.getUid()).child("participatingHunt").removeValue();
+            firebaseDatabase.child("hunts").child(NavigationActivity.huntUid).child("huntPlayers").child(NavigationActivity.userUid).removeValue();
             Toast.makeText(getContext(), R.string.admin_left_hunt_toast, Toast.LENGTH_LONG).show();
         }
     }
@@ -60,9 +63,13 @@ public class AdminFragment extends Fragment {
     private void joinHunt() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            HuntUser huntUser = new HuntUser(user.getDisplayName(), user.getEmail(), NavigationActivity.huntUid);
             DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-            firebaseDatabase.child(getString(R.string.firebase_path_users)).child(user.getUid()).setValue(huntUser);
+
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put("/hunts/" + NavigationActivity.huntUid + "/huntPlayers/" + NavigationActivity.userUid, true);
+            childUpdates.put("/users/" + NavigationActivity.userUid + "/participatingHunt", NavigationActivity.huntUid);
+            firebaseDatabase.updateChildren(childUpdates);
+
             Toast.makeText(getContext(), R.string.admin_join_hunt_toast, Toast.LENGTH_LONG).show();
         }
     }

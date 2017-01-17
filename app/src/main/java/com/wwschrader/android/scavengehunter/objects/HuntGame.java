@@ -1,5 +1,7 @@
 package com.wwschrader.android.scavengehunter.objects;
 
+import java.util.Map;
+
 /**
  * Created by Warren on 12/13/2016.
  * Object representing hunt games to be synced on Firebase
@@ -12,6 +14,7 @@ public class HuntGame {
     private long huntStartTime;
     private long huntEndingTime;
     private String userUid;
+    private Map<String, Boolean> huntPlayers;
 
     public HuntGame(){}
 
@@ -58,5 +61,13 @@ public class HuntGame {
 
     public void setHuntEndingTime(long huntEndingTime) {
         this.huntEndingTime = huntEndingTime;
+    }
+
+    public Map<String, Boolean> getHuntPlayers() {
+        return huntPlayers;
+    }
+
+    public void setHuntPlayers(Map<String, Boolean> huntPlayers) {
+        this.huntPlayers = huntPlayers;
     }
 }

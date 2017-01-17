@@ -19,10 +19,9 @@ public class HuntUser {
     //default constructor
     public HuntUser(){}
 
-    public HuntUser(String username, String email, String participatingHunt){
+    public HuntUser(String username, String email){
         this.username = username;
         this.email = email;
-        this.participatingHunt = participatingHunt;
     }
 
     public String getUsername() {
