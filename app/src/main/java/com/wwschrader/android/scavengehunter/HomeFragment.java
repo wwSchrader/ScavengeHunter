@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -55,6 +56,13 @@ public class HomeFragment extends Fragment {
         });
 
         joinHuntButton = (Button) rootView.findViewById(R.id.join_hunt_btn);
+        joinHuntButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment joinHuntDialogFragment = new JoinHuntDialog();
+                joinHuntDialogFragment.show(getFragmentManager(), "JoinHunDialogFragment");
+            }
+        });
 
         deleteHuntButton = (Button) rootView.findViewById(R.id.home_delete_hunt_btn);
         deleteHuntButton.setOnClickListener(new View.OnClickListener() {

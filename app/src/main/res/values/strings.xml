@@ -98,4 +98,16 @@
 
     <!--hunt objectives fragment strings-->
     <string name="hunt_fragment_objectives_title">Objectives</string>
+
+    <!--join hunt dialog strings-->
+    <string name="join_hunt_name_edit_text">Hunt Name</string>
+    <string name="join_hunt_password_edit_text">Hunt\'s password</string>
+    <string name="join_hunt_found_msg">Matching Hunt is found!</string>
+    <string name="join_hunt_no_matching">No matching hunt</string>
+    <string name="join_hunt_title">Join a Hunt</string>
+    <string name="join_hunt_ok">OK</string>
+    <string name="join_hunt_cancel">Cancel</string>
+    <string name="join_hunt_msg">Joined Hunt!</string>
+    <string name="join_hunt_incorrect_pswd">Incorrect Password</string>
+    <string name="join_hunt_enter_name_msg">Please enter the name of the hunt!</string>
 </resources>
