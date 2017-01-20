@@ -39,9 +39,9 @@ public class HuntObjectivesFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.hunt_objectives_recycler);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mObjectiveReference = mDatabaseReference.child("objectives").child(NavigationActivity.huntUid);
+        mObjectiveReference = mDatabaseReference.child("objectives").child(NavigationActivity.playerHuntUid);
 
-        mUserReference = mDatabaseReference.child("users").child(NavigationActivity.huntUid);
+        mUserReference = mDatabaseReference.child("users").child(NavigationActivity.playerHuntUid);
 
         mAdapter = new PlayerObjectivesRecyclerViewAdapter(
                 HuntObjectives.class,

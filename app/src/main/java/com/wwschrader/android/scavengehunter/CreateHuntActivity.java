@@ -109,7 +109,11 @@ public class CreateHuntActivity extends AppCompatActivity implements TimeDateDia
         if (user != null){
             //push hunt object to firebase then close activity
             HuntGame huntGame = new HuntGame(huntName, huntPassword, startTime, endTime, user.getUid());
-            databaseReference.child("hunts").push().setValue(huntGame);
+            String huntKey = databaseReference.child("hunts").push().getKey();
+            databaseReference.child("hunts").child(huntKey).setValue(huntGame);
+            //add huntKey to user object
+            databaseReference.child("users").child(user.getUid()).child("adminHunt").setValue(huntKey);
+
             finish();
         }
 

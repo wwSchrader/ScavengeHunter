@@ -71,8 +71,8 @@ public class HomeFragment extends Fragment {
                 if(huntUniqueId != null){
                     //remove hunt from firebase
                     mDatabaseReference.child("hunts").child(huntUniqueId).removeValue();
+                    mDatabaseReference.child("users").child(NavigationActivity.userUid).child("adminHunt").removeValue();
                     Toast.makeText(mContext, "Hunt deleted!", Toast.LENGTH_LONG).show();
-
                     huntUniqueId = null;
                 }
             }

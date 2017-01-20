@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,10 +47,11 @@ public class NavigationActivity extends AppCompatActivity {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabaseReference;
     private HuntGame mHuntGame;
-    private MenuItem menuNavAdmin;
+    private MenuItem menuNavAdmin, menuNavHunt;
     private Context mContext;
     //hunt key to be publicly accessible to fragments for firebase references
-    public static String huntUid;
+    public static String playerHuntUid;
+    public static String adminHuntUid;
     public static String userUid;
     public HuntUser mHuntUser;
     DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("users");
@@ -90,6 +90,8 @@ public class NavigationActivity extends AppCompatActivity {
                     for (DataSnapshot user: dataSnapshot.getChildren()){
                         if (user.getKey().equals(userUid)){
                             mHuntUser = user.getValue(HuntUser.class);
+                            //look for active hunt and modify nav drawer options
+                            checkDataBaseForHunt();
                         }
                     }
 
@@ -107,11 +109,11 @@ public class NavigationActivity extends AppCompatActivity {
             });
         }
 
-        //to setup enabling or disabling menu item based on user hosting a hunt
+        //to setup enabling or disabling menu item based on user hosting a hunt or participating in hunt
         menuNavAdmin = mNavigationView.getMenu().findItem(R.id.navigation_admin);
+        menuNavHunt = mNavigationView.getMenu().findItem(R.id.navigation_hunt);
 
-        //look for active hunt and modify nav drawer options
-        checkDataBaseForHunt();
+
 
         //setup animated hamburger icon
         mActionBarDrawerToggle = setupDrawerToggle();
@@ -204,38 +206,25 @@ public class NavigationActivity extends AppCompatActivity {
     }
 
     private void checkDataBaseForHunt() {
-        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
-        //look for any hunts matching uId. Change textview if found.
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot hunts: dataSnapshot.getChildren()){
-                    mHuntGame = hunts.getValue(HuntGame.class);
-                    if (mHuntGame.getHuntName() != null){
-                        //a hunt where user is admin is found. enable admin menu item
-                        menuNavAdmin.setVisible(true);
-                        menuNavAdmin.setEnabled(true);
+        if (mHuntUser.getParticipatingHunt() != null){
+            menuNavHunt.setVisible(true);
+            menuNavHunt.setEnabled(true);
+            playerHuntUid = mHuntUser.getParticipatingHunt();
+        } else {
+            menuNavHunt.setEnabled(false);
+            menuNavHunt.setVisible(false);
+            playerHuntUid = null;
+        }
 
-                        //assign hunt key to be publicly accessible to fragments for firebase references
-                        huntUid = hunts.getKey();
-                        return;
-                    }
-                }
-                //no hunts where user is admin. disable admin menu item
-                menuNavAdmin.setVisible(false);
-                menuNavAdmin.setEnabled(false);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("Event Listener", "loadHunt:onCancelled", databaseError.toException());
-                Toast.makeText(mContext, "Failed to retrieve hunt info.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        };
-        mDatabaseReference.child("hunts").orderByChild("userUid").equalTo(mFirebaseUser.getUid()).addValueEventListener(eventListener);
+        if (mHuntUser.getAdminHunt() != null){
+            menuNavAdmin.setVisible(true);
+            menuNavAdmin.setEnabled(true);
+            adminHuntUid = mHuntUser.getAdminHunt();
+        } else {
+            menuNavAdmin.setEnabled(false);
+            menuNavAdmin.setVisible(false);
+            adminHuntUid = null;
+        }
     }
 }

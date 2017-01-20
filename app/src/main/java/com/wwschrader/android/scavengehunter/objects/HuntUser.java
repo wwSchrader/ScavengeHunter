@@ -12,6 +12,7 @@ public class HuntUser {
     private String username;
     private String email;
     private String participatingHunt;
+    private String adminHunt;
     private Map<String, Boolean> accomplishedObjectives;
 
 
@@ -50,5 +51,13 @@ public class HuntUser {
 
     public void setAccomplishedObjectives(Map<String, Boolean> accomplishedObjectives) {
         this.accomplishedObjectives = accomplishedObjectives;
+    }
+
+    public String getAdminHunt() {
+        return adminHunt;
+    }
+
+    public void setAdminHunt(String adminHunt) {
+        this.adminHunt = adminHunt;
     }
 }

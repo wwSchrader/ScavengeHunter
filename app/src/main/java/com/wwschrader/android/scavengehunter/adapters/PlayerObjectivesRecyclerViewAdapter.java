@@ -57,14 +57,14 @@ public class PlayerObjectivesRecyclerViewAdapter extends FirebaseRecyclerAdapter
 
                 if (!viewHolder.objectivesCheckBox.isChecked()){
                     //remove user from objective and objective from user object
-                    childUpdates.put("/objectives/" + NavigationActivity.huntUid + "/" + objectiveKey + "/accomplishedUsers/" + NavigationActivity.userUid, null);
+                    childUpdates.put("/objectives/" + NavigationActivity.playerHuntUid + "/" + objectiveKey + "/accomplishedUsers/" + NavigationActivity.userUid, null);
                     childUpdates.put("/users/" + NavigationActivity.userUid + "/accomplishedObjectives/" + objectiveKey, null);
                     viewHolder.objectivesCheckBox.setChecked(false);
 
 
                 } else {
                     //add user to objective and objective to user object
-                    childUpdates.put("/objectives/" + NavigationActivity.huntUid + "/" + objectiveKey + "/accomplishedUsers/" + NavigationActivity.userUid, true);
+                    childUpdates.put("/objectives/" + NavigationActivity.playerHuntUid + "/" + objectiveKey + "/accomplishedUsers/" + NavigationActivity.userUid, true);
                     childUpdates.put("/users/" + NavigationActivity.userUid + "/accomplishedObjectives/" + objectiveKey, true);
                     viewHolder.objectivesCheckBox.setChecked(true);
                 }
