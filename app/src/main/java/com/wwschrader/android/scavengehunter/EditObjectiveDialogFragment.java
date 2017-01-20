@@ -73,7 +73,7 @@ public class EditObjectiveDialogFragment extends DialogFragment {
 
     private void deleteObjectiveInDatabase() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.playerHuntUid).child(uId).removeValue();
+        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.adminHuntUid).child(uId).removeValue();
     }
 
     private void updateObjectiveToDatabase() {
@@ -84,7 +84,7 @@ public class EditObjectiveDialogFragment extends DialogFragment {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.playerHuntUid).child(uId).setValue(huntObjectives);
+        databaseReference.child(getString(R.string.firebase_path_objectives)).child(NavigationActivity.adminHuntUid).child(uId).setValue(huntObjectives);
     }
 
 

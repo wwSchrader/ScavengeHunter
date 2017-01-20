@@ -39,7 +39,7 @@ public class AdminActivityManagementFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.objective_recycler_view);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mObjectiveReference = mDatabaseReference.child("objectives").child(NavigationActivity.playerHuntUid);
+        mObjectiveReference = mDatabaseReference.child("objectives").child(NavigationActivity.adminHuntUid);
         mAdapter = new ObjectivesRecyclerViewAdapter(
                 HuntObjectives.class,
                 R.layout.view_holder_objectives,

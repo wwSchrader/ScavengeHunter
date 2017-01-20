@@ -56,6 +56,7 @@ public class AdminFragment extends Fragment {
         if (user != null) {
             firebaseDatabase.child(getString(R.string.firebase_path_users)).child(user.getUid()).child("participatingHunt").removeValue();
             firebaseDatabase.child("hunts").child(NavigationActivity.playerHuntUid).child("huntPlayers").child(NavigationActivity.userUid).removeValue();
+            NavigationActivity.playerHuntUid = null;
             Toast.makeText(getContext(), R.string.admin_left_hunt_toast, Toast.LENGTH_LONG).show();
         }
     }
@@ -66,9 +67,11 @@ public class AdminFragment extends Fragment {
             DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference();
 
             Map<String, Object> childUpdates = new HashMap<>();
-            childUpdates.put("/hunts/" + NavigationActivity.playerHuntUid + "/huntPlayers/" + NavigationActivity.userUid, true);
-            childUpdates.put("/users/" + NavigationActivity.userUid + "/participatingHunt", NavigationActivity.playerHuntUid);
+            childUpdates.put("/hunts/" + NavigationActivity.adminHuntUid + "/huntPlayers/" + NavigationActivity.userUid, true);
+            childUpdates.put("/users/" + NavigationActivity.userUid + "/participatingHunt", NavigationActivity.adminHuntUid);
             firebaseDatabase.updateChildren(childUpdates);
+
+            NavigationActivity.playerHuntUid = NavigationActivity.adminHuntUid;
 
             Toast.makeText(getContext(), R.string.admin_join_hunt_toast, Toast.LENGTH_LONG).show();
         }
