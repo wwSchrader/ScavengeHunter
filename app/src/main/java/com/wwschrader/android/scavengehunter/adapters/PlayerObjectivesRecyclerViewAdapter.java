@@ -37,7 +37,7 @@ public class PlayerObjectivesRecyclerViewAdapter extends FirebaseRecyclerAdapter
         //check to see if user accomplished objective and set checkbox accordingly
         Map<String, Boolean> accomplishedObjectives = model.getAccomplishedUsers();
         if (accomplishedObjectives !=null){
-            if (accomplishedObjectives.get(NavigationActivity.userUid)){
+            if (accomplishedObjectives.get(NavigationActivity.userUid) != null){
                 viewHolder.objectivesCheckBox.setChecked(true);
             } else {
                 viewHolder.objectivesCheckBox.setChecked(false);

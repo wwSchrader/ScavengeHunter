@@ -1,11 +1,14 @@
 package com.wwschrader.android.scavengehunter;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +19,11 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.wwschrader.android.scavengehunter.objects.HuntGame;
 
 /**
@@ -79,42 +82,92 @@ public class HomeFragment extends Fragment {
         });
         huntStatusTextView = (TextView) rootView.findViewById(R.id.hunt_status_textview);
 
-        checkDataBaseForHunt();
+        if (NavigationActivity.adminHuntUid != null || NavigationActivity.playerHuntUid != null){
+            checkDataBaseForAdminHunt();
+        }
 
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(userObjectReceiver, new IntentFilter("user-object-updated"));
         return rootView;
     }
 
-    private void checkDataBaseForHunt() {
+    @Override
+    public void onDestroyView() {
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(userObjectReceiver);
+        super.onDestroyView();
+    }
+
+    private void checkDataBaseForAdminHunt() {
 
         //look for any hunts matching uId. Change textview if found.
-        ValueEventListener eventListener = new ValueEventListener() {
+        ChildEventListener eventListener = new ChildEventListener() {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot hunts: dataSnapshot.getChildren()){
-                    mHuntGame = hunts.getValue(HuntGame.class);
-                    if (mHuntGame.getHuntName() != null){
-                        huntUniqueId = hunts.getKey();
-                        huntStatusTextView.setText(mHuntGame.getHuntName());
-                        createHuntButton.setVisibility(Button.GONE);
-                        joinHuntButton.setVisibility(Button.GONE);
-                        deleteHuntButton.setVisibility(Button.VISIBLE);
-                        return;
-                    }
-                }
-                huntStatusTextView.setText(R.string.home_no_hunt_textview);
-                createHuntButton.setVisibility(Button.VISIBLE);
-                joinHuntButton.setVisibility(Button.VISIBLE);
-                deleteHuntButton.setVisibility(Button.GONE);
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                checkForAdminHunt(dataSnapshot);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                checkForAdminHunt(dataSnapshot);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
                 Log.w("Event Listener", "loadHunt:onCancelled", databaseError.toException());
-                Toast.makeText(getActivity(), "Failed to retrieve hunt info.",
-                        Toast.LENGTH_SHORT).show();
             }
         };
-        mDatabaseReference.child("hunts").orderByChild("userUid").equalTo(mFirebaseUser.getUid()).addValueEventListener(eventListener);
+
+        if (NavigationActivity.adminHuntUid != null){
+            mDatabaseReference.child("hunts").orderByChild(NavigationActivity.adminHuntUid).addChildEventListener(eventListener);
+        } else if (NavigationActivity.playerHuntUid != null){
+            mDatabaseReference.child("hunts").orderByChild(NavigationActivity.playerHuntUid).addChildEventListener(eventListener);
+        }
     }
+
+    private void checkForAdminHunt(DataSnapshot dataSnapshot) {
+
+        mHuntGame = dataSnapshot.getValue(HuntGame.class);
+        if (NavigationActivity.adminHuntUid != null && dataSnapshot.getKey().equals(NavigationActivity.adminHuntUid)){
+            huntUniqueId = dataSnapshot.getKey();
+            huntStatusTextView.setText(mHuntGame.getHuntName());
+            createHuntButton.setVisibility(Button.GONE);
+            joinHuntButton.setVisibility(Button.GONE);
+            if (mHuntGame.getUserUid().equals(NavigationActivity.userUid)){
+                deleteHuntButton.setVisibility(Button.VISIBLE);
+            }
+
+            return;
+        } else if (NavigationActivity.playerHuntUid != null && dataSnapshot.getKey().equals(NavigationActivity.mHuntUser.getParticipatingHunt())){
+            huntUniqueId = dataSnapshot.getKey();
+            huntStatusTextView.setText(mHuntGame.getHuntName());
+            createHuntButton.setVisibility(Button.GONE);
+            joinHuntButton.setVisibility(Button.GONE);
+            deleteHuntButton.setVisibility(Button.GONE);
+            return;
+        }
+
+        huntStatusTextView.setText(R.string.home_no_hunt_textview);
+        createHuntButton.setVisibility(Button.VISIBLE);
+        joinHuntButton.setVisibility(Button.VISIBLE);
+        deleteHuntButton.setVisibility(Button.GONE);
+    }
+
+    //receiver to check for hunt again if HuntUsers wasn't implemented in time in NavigationActivity
+    private final BroadcastReceiver userObjectReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkDataBaseForAdminHunt();
+        }
+    };
 }

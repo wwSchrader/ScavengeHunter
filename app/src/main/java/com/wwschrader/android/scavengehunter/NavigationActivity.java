@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +54,7 @@ public class NavigationActivity extends AppCompatActivity {
     public static String playerHuntUid;
     public static String adminHuntUid;
     public static String userUid;
-    public HuntUser mHuntUser;
+    public static HuntUser mHuntUser;
     DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
@@ -90,6 +91,7 @@ public class NavigationActivity extends AppCompatActivity {
                     for (DataSnapshot user: dataSnapshot.getChildren()){
                         if (user.getKey().equals(userUid)){
                             mHuntUser = user.getValue(HuntUser.class);
+                            sendUserObjectUpdateBroadcast();
                             //look for active hunt and modify nav drawer options
                             checkDataBaseForHunt();
                         }
@@ -99,6 +101,7 @@ public class NavigationActivity extends AppCompatActivity {
                     if (mHuntUser == null){
                         HuntUser huntUser = new HuntUser(mFirebaseUser.getDisplayName(), mFirebaseUser.getEmail());
                         userDatabase.child(userUid).setValue(huntUser);
+                        sendUserObjectUpdateBroadcast();
                     }
                 }
 
@@ -122,6 +125,13 @@ public class NavigationActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.child_fragment_container, new HomeFragment());
         fragmentTransaction.commit();
+    }
+
+    private void sendUserObjectUpdateBroadcast() {
+        //if user object changed, then send broadcast notifying of change
+        Intent intent = new Intent();
+        intent.setAction("user-object-updated");
+        LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
