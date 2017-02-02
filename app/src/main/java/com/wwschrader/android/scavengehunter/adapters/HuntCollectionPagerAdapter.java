@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.wwschrader.android.scavengehunter.HuntHomeFragment;
 import com.wwschrader.android.scavengehunter.HuntObjectivesFragment;
+import com.wwschrader.android.scavengehunter.HuntRankings;
 
 /**
  * Created by Warren on 12/31/2016.
@@ -28,6 +29,8 @@ public class HuntCollectionPagerAdapter extends FragmentStatePagerAdapter {
                 return new HuntHomeFragment();
             case 1:
                 return new HuntObjectivesFragment();
+            case 2:
+                return new HuntRankings();
             default:
                 return null;
         }
@@ -40,6 +43,8 @@ public class HuntCollectionPagerAdapter extends FragmentStatePagerAdapter {
                 return "Home";
             case 1:
                 return "Objectives";
+            case 2:
+                return "Rankings";
             default:
                 return null;
         }
@@ -47,6 +52,6 @@ public class HuntCollectionPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
